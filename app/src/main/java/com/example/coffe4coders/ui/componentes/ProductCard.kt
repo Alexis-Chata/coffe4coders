@@ -19,14 +19,14 @@ import com.example.coffe4coders.ui.theme.PlatziBlue
 import com.example.coffe4coders.ui.theme.PlatziGreen
 
 
-enum class  CountryISO(val iso: String) {
+enum class CountryISO(val iso: String) {
     COL("COL"),
     BRA("BRA"),
     CRI("CRI"),
     NIC("NIC");
 
     fun getBackgroundImage(): Int {
-        when(this) {
+        when (this) {
             COL -> return R.drawable.co
             BRA -> return R.drawable.br
             CRI -> return R.drawable.ri
@@ -35,7 +35,7 @@ enum class  CountryISO(val iso: String) {
     }
 
     fun getCountryFlag(): Int {
-        when(this) {
+        when (this) {
             COL -> return R.drawable.flagco
             BRA -> return R.drawable.flagbr
             CRI -> return R.drawable.flagri
@@ -44,7 +44,7 @@ enum class  CountryISO(val iso: String) {
     }
 
     fun getSurfaceColor(): Color {
-        when(this) {
+        when (this) {
             COL, NIC -> return PlatziBlue
             BRA, CRI -> return PlatziGreen
         }
@@ -52,11 +52,13 @@ enum class  CountryISO(val iso: String) {
 }
 
 @Composable
-fun ProductCard(name: String,
-                summary: String,
-                price: Double,
-                currency: String,
-                country: CountryISO) {
+fun ProductCard(
+    name: String,
+    summary: String,
+    price: Double,
+    currency: String,
+    country: CountryISO
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -66,8 +68,10 @@ fun ProductCard(name: String,
         elevation = 10.dp,
         shape = MaterialTheme.shapes.small
     ) {
-        Image(painter = painterResource(country.getBackgroundImage()),
-            contentDescription = null)
+        Image(
+            painter = painterResource(country.getBackgroundImage()),
+            contentDescription = null
+        )
         Surface(
             modifier = Modifier.fillMaxWidth(),
             color = country.getSurfaceColor().copy(alpha = 0.2f)
@@ -76,9 +80,12 @@ fun ProductCard(name: String,
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.padding(16.dp)
             ) {
-                Text(name,
-                    style = MaterialTheme.typography.h4)
-                Text(summary,
+                Text(
+                    name,
+                    style = MaterialTheme.typography.h4
+                )
+                Text(
+                    summary,
                     style = MaterialTheme.typography.body1
                 )
                 Column(
@@ -86,14 +93,17 @@ fun ProductCard(name: String,
                     verticalArrangement = Arrangement.Bottom
                 ) {
                     Row {
-                        Image(painter = painterResource(id = country.getCountryFlag()),
+                        Image(
+                            painter = painterResource(id = country.getCountryFlag()),
                             contentDescription = null,
                             modifier = Modifier.size(32.dp, 32.dp)
                         )
-                        Text("$ $price $currency",
+                        Text(
+                            "$ $price $currency",
                             modifier = Modifier.fillMaxWidth(),
                             textAlign = TextAlign.End,
-                            style = MaterialTheme.typography.h4)
+                            style = MaterialTheme.typography.h4
+                        )
                     }
                 }
             }
@@ -107,7 +117,8 @@ fun ProductCard(name: String,
 @Composable
 fun ProductCardPreview() {
     Coffe4codersTheme() {
-        ProductCard("Café de Brasil",
+        ProductCard(
+            "Café de Brasil",
             "Café de las montañas",
             35.0,
             "USD",
