@@ -41,6 +41,23 @@ fun DetailScreen(navController: NavController, countryISO: CountryISO) {
                 ) {
                     Text(text = "Volver")
                 }
+
+                Button(
+                    onClick = {
+                        navController.navigateUp()
+                    }
+                ) {
+                    Text(text = "Volver navigateUp")
+                }
+
+                Button(
+                    onClick = {
+                        navController.popBackStack()
+                    }
+                ) {
+                    Text(text = "Volver popBackStack")
+                }
+
             }
         }
 
