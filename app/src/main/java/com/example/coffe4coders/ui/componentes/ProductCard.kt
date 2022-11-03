@@ -8,7 +8,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -51,19 +50,24 @@ enum class CountryISO(val iso: String) {
     }
 }
 
+typealias SelectionAction = () -> Unit
+
 @Composable
 fun ProductCard(
     name: String,
     summary: String,
     price: Double,
     currency: String,
-    country: CountryISO
+    country: CountryISO,
+    selected: SelectionAction
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .clickable { }
+            .clickable {
+                selected()
+            }
             .size(480.dp),
         elevation = 10.dp,
         shape = MaterialTheme.shapes.small
@@ -123,6 +127,6 @@ fun ProductCardPreview() {
             35.0,
             "USD",
             CountryISO.BRA
-        )
+        ){}
     }
 }
